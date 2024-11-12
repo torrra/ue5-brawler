@@ -25,25 +25,28 @@ public:
 	UFUNCTION()
 	void TakeDamage(float Amount);
 
-
-	FComponentDeathSignature OnDeath;
-
-
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+	void FindPlayerHud();
 
 
+public:
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Life")
-	float MaxLife = 5.f;
+	FComponentDeathSignature OnDeath;
 
 
 private:
 
+	TObjectPtr<class AGladiatorHUD> Hud;
+
 	UPROPERTY(VisibleInstanceOnly)
 	float Life = -1.f;
 
+protected:
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Life")
+	float MaxLife = 5.f;
 
 };
