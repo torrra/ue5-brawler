@@ -25,6 +25,9 @@ public:
 	UFUNCTION()
 	void TakeDamage(float Amount);
 
+	UFUNCTION(BlueprintCallable)
+	float GetLife();
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;

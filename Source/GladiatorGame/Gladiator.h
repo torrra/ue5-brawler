@@ -15,6 +15,7 @@ public:
 	// Sets default values for this character's properties
 	AGladiator();
 
+	UFUNCTION(BlueprintCallable)
 	float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent,
 		AController* EventInstigator, AActor* DamageCauser) override;
 
@@ -77,11 +78,10 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Effects")
 	TObjectPtr<UMaterialInterface>	SecondaryDamageMaterial;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	TObjectPtr<class ULifeComponent> Life;
 
 private:
-
-	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<class ULifeComponent> Life;
 
 	TObjectPtr<UMaterialInterface>	 InitialMaterial;
 	TObjectPtr<UMaterialInterface>	 SecondaryInitialMaterial;

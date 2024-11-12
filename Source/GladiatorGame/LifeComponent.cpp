@@ -43,6 +43,11 @@ void ULifeComponent::TakeDamage(float Amount)
 
 }
 
+float ULifeComponent::GetLife()
+{
+	return Life;
+}
+
 
 // Called when the game starts
 void ULifeComponent::BeginPlay()
