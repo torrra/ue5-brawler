@@ -37,20 +37,19 @@ void AGladiatorAIController::BeginPlay()
 	Super::BeginPlay();
 
 	TArray<AActor*>		GladiatorArray;
+	AActor*				Player = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
 
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AGladiator::StaticClass(), GladiatorArray);
-	Blackboard->SetValueAsObject(TEXT("TargetActor"), UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+	Blackboard->SetValueAsObject(TEXT("TargetActor"), Player);
 
 	if (AGladiator* Gladiator = Cast<AGladiator>(GetCharacter()))
 		Gladiator->GetLifeComponent()->OnDeath.AddDynamic(this, &AGladiatorAIController::OnDeath);
+
+	SetFocus(Player);
 }
 
 void AGladiatorAIController::OnPossess(APawn* InPawn)
 {
 	Super::OnPossess(InPawn);
-
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("AGladiatorAIController::OnPossess()"));
-
 	RunBehaviorTree(BehaviorTreeAsset);
 
 	// Populate blackboard
@@ -61,7 +60,9 @@ void AGladiatorAIController::OnPossess(APawn* InPawn)
 
 void AGladiatorAIController::OnDeath()
 {
-	BrainComponent->StopLogic(TEXT("Enemy is dead"));
+	if (UBehaviorTreeComponent* BehaviorTreeComponent = Cast<UBehaviorTreeComponent>(BrainComponent))
+		BehaviorTreeComponent->StopLogic(TEXT("Enemy is dead"));
+
 	bIsDead = true;
 }
 
@@ -82,4 +83,9 @@ bool AGladiatorAIController::IsCloseToTarget() const
 bool AGladiatorAIController::IsDead() const
 {
 	return bIsDead;
+}
+
+float AGladiatorAIController::GetMinDistance() const
+{
+	return AcceptableDistanceError;
 }

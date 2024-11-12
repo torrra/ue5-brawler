@@ -18,6 +18,7 @@ public:
 
 	AGladiatorAIController(const FObjectInitializer& ObjectInitializer);
 
+	UFUNCTION(BlueprintCallable)
 	void SetEnemyTargetLocation(FVector2D Target);
 
 	bool IsTargetPositionValid(const FVector2D& Target) const;
@@ -25,6 +26,8 @@ public:
 	bool IsCloseToTarget() const;
 
 	bool IsDead() const;
+
+	float GetMinDistance() const;
 
 protected:
 
