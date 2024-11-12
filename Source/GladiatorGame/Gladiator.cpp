@@ -30,6 +30,13 @@ float AGladiator::TakeDamage(float Damage, FDamageEvent const& DamageEvent, ACon
 
 	Life->TakeDamage(ActualDamage);
 
+	GetMesh()->SetMaterial(0, DamageMaterial);
+
+	if (SecondaryDamageMaterial)
+		GetMesh()->SetMaterial(1, SecondaryDamageMaterial);
+
+	GetWorld()->GetTimerManager().SetTimer(DamageMaterialHandle, this, &AGladiator::ResetMaterial, DamageMaterialTime, false);
+
 	return ActualDamage;
 }
 
@@ -71,6 +78,8 @@ void AGladiator::BeginPlay()
 	AttackVolume->OnComponentBeginOverlap.AddDynamic(this, &AGladiator::OnDealDamage);
 	AttackVolume->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
+	InitialMaterial = GetMesh()->GetMaterial(0);
+	SecondaryInitialMaterial = GetMesh()->GetMaterial(1);
 }
 
 // Called every frame
@@ -104,6 +113,14 @@ void AGladiator::OnDealDamage(UPrimitiveComponent* OverlappedComponent, AActor* 
 		OtherActor->TakeDamage(AttackDamage, FDamageEvent(), GetController(), this);
 }
 
+void AGladiator::ResetMaterial()
+{
+	GetMesh()->SetMaterial(0, InitialMaterial);
+
+	if (SecondaryInitialMaterial)
+		GetMesh()->SetMaterial(1, SecondaryInitialMaterial);
+}
+
 void AGladiator::Move(const FInputActionValue& InputValue)
 {
 	FVector2D ValueVector = InputValue.Get<FVector2D>();
@@ -119,12 +136,12 @@ void AGladiator::Jump()
 }
 
 
-void AGladiator::StartAttack(const FInputActionValue& InputValue)
+void AGladiator::StartAttack()
 {
 	bIsAttacking = true;
 }
 
-void AGladiator::StopAttacking(const FInputActionValue& InputValue)
+void AGladiator::StopAttacking()
 {
 	bIsAttacking = false;
 }

@@ -37,9 +37,11 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UFUNCTION(BlueprintCallable)
+	void StartAttack();
 
-	void StartAttack(const struct FInputActionValue& InputValue);
-	void StopAttacking(const struct FInputActionValue& InputValue);
+	UFUNCTION(BlueprintCallable)
+	void StopAttacking();
 
 	void Move(const struct FInputActionValue& InputValue);
 	void Jump() override;
@@ -57,14 +59,23 @@ private:
 		bool bFromSweep, const FHitResult& SweepResult);
 
 
+	UFUNCTION()
+	void ResetMaterial();
+
+
+	FTimerHandle			DamageMaterialHandle;
+
+
 protected:
 
 	UPROPERTY(EditAnywhere, Category = "Attack")
 	FComponentReference		AttackVolumeReference;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Effects")
+	TObjectPtr<UMaterialInterface>	DamageMaterial;
 
-	UPROPERTY(EditAnywhere, Category = "Attack")
-	float					AttackDamage = 1.f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Effects")
+	TObjectPtr<UMaterialInterface>	SecondaryDamageMaterial;
 
 
 private:
@@ -72,8 +83,21 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<class ULifeComponent> Life;
 
+	TObjectPtr<UMaterialInterface>	 InitialMaterial;
+	TObjectPtr<UMaterialInterface>	 SecondaryInitialMaterial;
+
 	TObjectPtr<UPrimitiveComponent>	 AttackVolume;
 
+protected:
+
+	UPROPERTY(EditAnywhere, Category = "Attack")
+	float					AttackDamage = 1.f;
+
+
+	UPROPERTY(EditAnywhere, Category = "Effects")
+	float					DamageMaterialTime = 0.5f;
+
+private:
 
 	UPROPERTY()
 	bool	bIsAttacking = false;
