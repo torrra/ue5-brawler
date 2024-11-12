@@ -17,9 +17,6 @@ void UGladiatorAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	{
 		Speed = Gladiator->GetCharacterMovement()->Velocity.Size();
 
-		/*if (Speed > 0.f)
-			__debugbreak();*/
-
 		bIsDead = Gladiator->GetLifeComponent()->IsDead();
 		bIsAttacking = Gladiator->IsAttacking();
 		bIsJumping = Gladiator->bPressedJump;
