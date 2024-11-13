@@ -37,7 +37,14 @@ float AGladiator::TakeDamage(float Damage, FDamageEvent const& DamageEvent, ACon
 
 	GetWorld()->GetTimerManager().SetTimer(DamageMaterialHandle, this, &AGladiator::ResetMaterial, DamageMaterialTime, false);
 
+	UpdateDamage();
+
 	return ActualDamage;
+}
+
+void AGladiator::UpdateDamage_Implementation()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Cyan, TEXT("Default damage update"));
 }
 
 ULifeComponent* AGladiator::GetLifeComponent()
@@ -109,8 +116,19 @@ void AGladiator::OnDealDamage(UPrimitiveComponent* OverlappedComponent, AActor* 
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
 	bool bFromSweep, const FHitResult& SweepResult)
 {
+	double CurrentTime = GetWorld()->GetTime().GetWorldTimeSeconds();
+	double Diff = CurrentTime - LastDamageTime;
+
+
+	if (Diff < DamageCooldown)
+		return;
+
+
 	if (OtherActor != this)
+	{
 		OtherActor->TakeDamage(AttackDamage, FDamageEvent(), GetController(), this);
+		LastDamageTime = CurrentTime;
+	}
 }
 
 void AGladiator::ResetMaterial()

@@ -19,6 +19,9 @@ public:
 	float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent,
 		AController* EventInstigator, AActor* DamageCauser) override;
 
+	UFUNCTION(BlueprintNativeEvent)
+	void UpdateDamage();
+
 	class ULifeComponent* GetLifeComponent();
 
 	bool IsAttacking();
@@ -88,16 +91,23 @@ private:
 
 	TObjectPtr<UPrimitiveComponent>	 AttackVolume;
 
+	double		LastDamageTime = 0.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Attack")
+	double		DamageCooldown = 0.5f;
+
 protected:
 
 	UPROPERTY(EditAnywhere, Category = "Attack")
-	float					AttackDamage = 1.f;
+	float		AttackDamage = 1.f;
 
 
 	UPROPERTY(EditAnywhere, Category = "Effects")
-	float					DamageMaterialTime = 0.5f;
+	float		DamageMaterialTime = 0.5f;
+
 
 private:
+
 
 	UPROPERTY()
 	bool	bIsAttacking = false;
