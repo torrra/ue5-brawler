@@ -157,9 +157,12 @@ void AGladiator::Jump()
 void AGladiator::StartAttack()
 {
 	bIsAttacking = true;
+	GetCharacterMovement()->StopMovementImmediately();
+	GetCharacterMovement()->DisableMovement();
 }
 
 void AGladiator::StopAttacking()
 {
 	bIsAttacking = false;
+	GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
 }
