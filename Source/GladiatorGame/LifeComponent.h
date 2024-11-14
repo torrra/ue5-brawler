@@ -32,17 +32,12 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-	void FindPlayerHud();
-
-
 public:
 
 	FComponentDeathSignature OnDeath;
 
 
 private:
-
-	TObjectPtr<class AGladiatorHUD> Hud;
 
 	UPROPERTY(VisibleInstanceOnly)
 	float Life = -1.f;

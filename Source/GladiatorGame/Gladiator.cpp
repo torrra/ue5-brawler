@@ -42,11 +42,6 @@ float AGladiator::TakeDamage(float Damage, FDamageEvent const& DamageEvent, ACon
 	return ActualDamage;
 }
 
-void AGladiator::UpdateDamage_Implementation()
-{
-	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Cyan, TEXT("Default damage update"));
-}
-
 ULifeComponent* AGladiator::GetLifeComponent()
 {
 	return Life;

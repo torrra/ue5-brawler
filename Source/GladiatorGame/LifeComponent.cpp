@@ -37,10 +37,6 @@ void ULifeComponent::TakeDamage(float Amount)
 		FString Message = FString::Printf(TEXT("Still alive with %f HP\n"), Life);
 		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, Message);
 	}
-
-	if (Hud)
-		Hud->UpdateLifeRatio(Life / MaxLife);
-
 }
 
 float ULifeComponent::GetLife()
@@ -55,24 +51,7 @@ void ULifeComponent::BeginPlay()
 	Super::BeginPlay();
 
 	Life = MaxLife;
-
-	FindPlayerHud();
 }
 
-void ULifeComponent::FindPlayerHud()
-{
-	ACharacter* OwnerCharacter = Cast<ACharacter>(GetOwner());
-
-	if (!OwnerCharacter)
-		return;
-
-	APlayerController* PlayerController = Cast<APlayerController>(OwnerCharacter->GetController());
-
-	if (!PlayerController)
-		return;
-
-	Hud = Cast<AGladiatorHUD>(PlayerController->GetHUD());
-
-}
 
 

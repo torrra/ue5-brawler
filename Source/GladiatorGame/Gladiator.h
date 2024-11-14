@@ -19,8 +19,6 @@ public:
 	float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent,
 		AController* EventInstigator, AActor* DamageCauser) override;
 
-	UFUNCTION(BlueprintNativeEvent)
-	void UpdateDamage();
 
 	class ULifeComponent* GetLifeComponent();
 
@@ -31,6 +29,10 @@ public:
 	void StopDamage();
 
 protected:
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateDamage();
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 

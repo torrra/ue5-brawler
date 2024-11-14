@@ -16,6 +16,7 @@ class GLADIATORGAME_API AGladiatorHUD : public AHUD
 
 public:
 
+	UFUNCTION(BlueprintCallable)
 	void UpdateLifeRatio(float NewRatio);
 
 protected:
