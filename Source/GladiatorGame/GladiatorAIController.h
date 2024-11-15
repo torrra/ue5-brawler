@@ -29,6 +29,14 @@ public:
 
 	float GetMinDistance() const;
 
+	UFUNCTION(BlueprintCallable)
+	void BeginAttackSequence();
+
+	UFUNCTION(BlueprintCallable)
+	void EndAttackSequence();
+
+	bool IsCurrentlyAttacking();
+
 protected:
 
 	void BeginPlay() override;
@@ -68,5 +76,7 @@ protected:
 private:
 
 	bool							bIsDead = false;
+
+	bool							bIsCurrentlyAttacking = false;
 
 };

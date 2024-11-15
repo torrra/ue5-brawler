@@ -4,9 +4,9 @@
 #include "AIDirector.h"
 #include "GladiatorAIController.h"
 #include "Gladiator.h"
+#include "GladiatorHUD.h"
 
 #include <BehaviorTree/BlackboardComponent.h>
-
 #include <Kismet/GameplayStatics.h>
 
 // Sets default values
@@ -50,28 +50,13 @@ void AAIDirector::BeginPlay()
 void AAIDirector::CalculateTargetPositions()
 {
 	FVector				PlayerLocation = AiTarget->GetActorLocation();
-
-	/*if (!CheckMinimumTargetDistance(PlayerLocation))
-		return;*/
-
-	TArray<AGladiatorAIController*>	InvalidEnemies;
-
 	FVector2D			PlayerLocation2D = FVector2D(PlayerLocation.X, PlayerLocation.Y);
-
 	constexpr float		OffsetOnFailure = 1.5f;
 
-
 	for (AGladiatorAIController* Enemy : ValidEnemies)
-	{
-		if (Enemy->IsDead())
-			InvalidEnemies.Add(Enemy);
-
-		else
-			CalculateSingleTargetPosition(PlayerLocation2D, Enemy, OffsetOnFailure);
-	}
+		CalculateSingleTargetPosition(PlayerLocation2D, Enemy, OffsetOnFailure);
 
 	PreviousAiTargetPosition = PlayerLocation;
-	InvalidateEnemies(InvalidEnemies);
 }
 
 void AAIDirector::CalculateSingleTargetPosition(
@@ -115,6 +100,23 @@ void AAIDirector::ReturnAttackToken()
 	++AttackTokenCount;
 }
 
+void AAIDirector::NotifyEnemyDeath(AGladiatorAIController* Enemy)
+{
+	if (Enemy->IsCurrentlyAttacking())
+		ReturnAttackToken();
+
+	ValidEnemies.Remove(Enemy);
+
+	if (!ValidEnemies.IsEmpty())
+		return;
+
+	if (AGladiatorHUD* PlayerHUD = Cast<AGladiatorHUD>(UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetHUD()))
+	{
+		PlayerHUD->AllEnemiesKilled();
+	}
+
+}
+
 bool AAIDirector::CheckValidEnemyPosition(const AGladiatorAIController* Enemy, const FVector2D& Target)
 {
 
@@ -152,6 +154,7 @@ void AAIDirector::AttackTarget()
 	AGladiatorAIController* SelectedController = ValidEnemies[FMath::RandRange(0, ValidEnemies.Num() - 1)];
 
 	SelectedController->GetBlackboardComponent()->SetValueAsBool(TEXT("ShouldAttack"), true);
+	SelectedController->BeginAttackSequence();
 
 	--AttackTokenCount;
 }

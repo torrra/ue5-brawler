@@ -1,10 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "GladiatorAIController.h"
+
+#include "AIDirector.h"
 #include "Gladiator.h"
 #include "LifeComponent.h"
-
 
 #include <BehaviorTree/BehaviorTreeComponent.h>
 #include <BehaviorTree/BehaviorTree.h>
@@ -60,6 +60,9 @@ void AGladiatorAIController::OnPossess(APawn* InPawn)
 
 void AGladiatorAIController::OnDeath()
 {
+	if (AAIDirector* Director = Cast<AAIDirector>(Blackboard->GetValueAsObject(TEXT("Director"))))
+		Director->NotifyEnemyDeath(this);
+
 	if (UBehaviorTreeComponent* BehaviorTreeComponent = Cast<UBehaviorTreeComponent>(BrainComponent))
 		BehaviorTreeComponent->StopLogic(TEXT("Enemy is dead"));
 
@@ -88,4 +91,19 @@ bool AGladiatorAIController::IsDead() const
 float AGladiatorAIController::GetMinDistance() const
 {
 	return AcceptableDistanceError;
+}
+
+void AGladiatorAIController::BeginAttackSequence()
+{
+	bIsCurrentlyAttacking = true;
+}
+
+void AGladiatorAIController::EndAttackSequence()
+{
+	bIsCurrentlyAttacking = false;
+}
+
+bool AGladiatorAIController::IsCurrentlyAttacking()
+{
+	return bIsCurrentlyAttacking;
 }

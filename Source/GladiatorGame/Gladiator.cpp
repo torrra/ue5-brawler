@@ -103,8 +103,10 @@ void AGladiator::OnDeath()
 	if (GEngine)
 		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Cyan, TEXT("I am dead\n"));
 
+	bIsAttacking = false;
 	GetMovementComponent()->Deactivate();
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
+	UpdateDeath();
 }
 
 void AGladiator::OnDealDamage(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,

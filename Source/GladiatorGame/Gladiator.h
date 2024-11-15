@@ -33,6 +33,10 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent)
 	void UpdateDamage();
 
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateDeath();
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 

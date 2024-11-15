@@ -19,6 +19,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void UpdateLifeRatio(float NewRatio);
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void AllEnemiesKilled();
+
 protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)

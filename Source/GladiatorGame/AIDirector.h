@@ -32,6 +32,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void ReturnAttackToken();
 
+
+	void NotifyEnemyDeath(class AGladiatorAIController* Enemy);
+
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
