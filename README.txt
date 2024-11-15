@@ -67,3 +67,66 @@ III. Limitations and known bugs
 	=> Collisions with gladiator hammers are a bit weird, due to how far the hammer reaches
 	during the attack animation. I tried to reduce the damage window by reducing the 
 	AttackNotifyState length and saw a minor improvement.
+
+
+
+
+IV. Assets
+
+Day ambient music:
+Electric Rock Intense Epic Music
+
+Music by  AllWorldMusic
+https://pixabay.com/users/allworldmusic-46839791/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=258514
+from Pixabay
+https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=258514
+
+
+
+Night ambient music:
+Beautiful Piano & Flute Instrumental Inspiring Music
+
+Music by Denis Pavlov
+https://pixabay.com/users/denis-pavlov-music-35636692/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=233692
+from Pixabay
+https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=233692
+
+
+
+Sand footstep:
+Footsteps on gravel
+
+Sound Effect by freesound_community
+https://pixabay.com/users/freesound_community-46691455/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=61337
+from Pixabay 
+https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=61337
+
+
+
+stone footstep:
+Concrete Footsteps
+
+Sound Effect by freesound_community
+https://pixabay.com/users/freesound_community-46691455/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=6752
+from Pixabay
+https://pixabay.com/sound-effects//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=6752
+
+
+
+win jingle:
+taratata
+
+Sound Effect by freesound_community
+https://pixabay.com/users/freesound_community-46691455/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=6264
+from Pixabay
+https://pixabay.com/sound-effects//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=6264
+
+
+
+lose jingle:
+verloren
+
+Sound Effect by freesound_community
+https://pixabay.com/users/freesound_community-46691455/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=89595
+ from Pixabay
+https://pixabay.com/sound-effects//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=89595
