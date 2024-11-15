@@ -26,6 +26,9 @@ AGladiator::AGladiator()
 
 float AGladiator::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
+	if (Life->IsDead())
+		return 0.f;
+
 	float ActualDamage = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
 
 	Life->TakeDamage(ActualDamage);
