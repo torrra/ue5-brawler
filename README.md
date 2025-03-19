@@ -1,6 +1,16 @@
-# Gladiator project
+# Brawler UE 5.4
 
-This project was a 3-week school assignment. The goal was to practice and use C++ and Blueprint together in Unreal Engine 5.
+<br>
+
+This project was a 3-week school assignment. The goal was to practice and use C++ and Blueprint together in Unreal Engine 5.4.
+
+<br>
+
+![run](https://github.com/user-attachments/assets/dde061a5-1b7b-4696-bab3-9a8134d88b24)
+![attack](https://github.com/user-attachments/assets/3c714677-a279-4cb4-aa9c-b3f1bf85ae6e)
+![death](https://github.com/user-attachments/assets/59847866-3515-4b26-b11c-874896f4aa0a)
+
+<br>
 
 ## I. Architecture
 
