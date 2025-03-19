@@ -1,5 +1,7 @@
 # Gladiator project
 
+This project was a 3-week school assignment. The goal was to practice and use C++ and Blueprint together in Unreal Engine 5.
+
 ## I. Architecture
 
 Gladiator (C++ Character class)   
